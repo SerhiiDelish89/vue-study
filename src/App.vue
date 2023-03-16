@@ -1,15 +1,37 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <h1>{{ title }}</h1>
+ <HomeButton  @:click="increment">Click me</HomeButton>
+<StarRating :rating="4"/>
+
+
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import HomeButton from "./components/HomeButton.vue"
+import StarRating from "./components/StartRating.vue"
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HomeButton,
+    StarRating,
+  },
+  data() {
+    return {
+      amountOfClicks: 0,
+    }
+  },
+  computed: {
+    title() {
+      return `Amount of clicks ${this.amountOfClicks}`
+    }
+  },
+  methods: {
+    increment() {
+      this.amountOfClicks += 1
+    }
   }
 }
 </script>
