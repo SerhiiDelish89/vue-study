@@ -1,48 +1,57 @@
 <template>
-    <div class="apartments-item">
-<div class="apartments-item__inner">
-    <img :src="imgSrc" alt="" class="apartments-item__photo" >
-    <div class="apartments-item__content">
+  <div class="apartments-item" @click="$emit('click')">
+    <div class="apartments-item__inner">
+      <img :src="imgSrc" alt="" class="apartments-item__photo" />
+      <div class="apartments-item__content">
         <p class="apartments-item__description">{{ descr }}</p>
-        <div class="apartments-item__rating"> 
-            <StarRating :rating="rating"/>
+        <div class="apartments-item__rating">
+          <StarRating :rating="rating" />
         </div>
         <div class="apartments-item__price">AUD {{ price }}</div>
+        <a href="https://facebook.com" @click.prevent="handleLinkClick">facebook</a>
+      </div>
     </div>
-</div>
-    </div>
+  </div>
 </template>
 
 <script>
-
-import StarRating from "../StartRating.vue"
-    export default {
-        name: "ApartmentsItem",components:{
-            StarRating,
-        },
-        data(){
-
-        }  ,      
-        props: {
-            descr:{
-                type: String,
-                default: ''
-            },
-            rating:{
-                type: Number,
-                default: 0,
-            },
-            price:{
-                type: Number,
-                required: true
-            },
-            imgSrc:{
-                type: String,
-                default: ''
-            }
-        }
-        
+import StarRating from "../StartRating.vue";
+export default {
+  name: "ApartmentsItem",
+  components: {
+    StarRating,
+  },
+  props: {
+    descr: {
+      type: String,
+      default: "",
+    },
+    rating: {
+      type: Number,
+      default: 0,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    imgSrc: {
+      type: String,
+      default: "",
+    },
+    id: {
+      type: String,
+      required: true,
+    },
+  },
+  methods: {
+    log(){
+      console.log('adfasfafaf')
+    },
+    handleLinkClick(){
+      console.log('facebook clicked')
     }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -50,7 +59,7 @@ import StarRating from "../StartRating.vue"
   position: relative;
   width: 30.333%;
   padding: 0 15px;
-  margin-bottom: 30px;
+   margin-bottom: 30px;
   &__inner {
     position: relative;
   }

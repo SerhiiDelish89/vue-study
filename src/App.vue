@@ -1,63 +1,48 @@
 <template>
- 
- <!-- <HomeButton  @:click="increment">Click me</HomeButton> -->
-<!-- <ApartmentsItem 
-:descr="apartment.descr" 
-:price="apartment.price" 
-:rating="apartment.rating" 
-/> -->
-<ApartmentsList :items="apartments"/>
+  <h2>{{ text }}</h2>
+  <CustomInput v-model="text"/>
+  <ApartmentsList :items="apartments ">
+    
+    <template v-slot:title>New title</template>
+<template v-slot:apartment="{apartment}">
+  <ApartmentsItem
+        :key="apartment.id"
+        :descr="apartment.descr"
+        :rating="apartment.rating"
+        :imgSrc="apartment.imgUrl"
+        :price="apartment.price"
+        @click="handleItemClick"
+      />
+</template>
+
+  </ApartmentsList>
 </template>
 
 <script>
-
-// import HomeButton from "./components/HomeButton.vue"
-// import ApartmentsItem from "./components/apartment/ApartmenstItem.vue"
-import ApartmentsList from './components/apartment/ApartmentsList.vue';
-import apartments from "./components/apartment/apartments"
+import ApartmentsList from "./components/apartment/ApartmentsList.vue";
+import ApartmentsItem from "./components/apartment/ApartmentsItem.vue";
+import CustomInput from './components/shared/CustomInput.vue'
+import apartments from "./components/apartment/apartments";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    // HomeButton,
-    // ApartmentsItem,
     ApartmentsList,
+     ApartmentsItem,
+     CustomInput,
   },
-  data(){
+  data() {
     return {
       apartments,
-      apartment:{
-        id: '5fjiiojfgj4jj4gp4ugj45g9',
-        title: "Apartment",
-        descr: "Luxurious Scandinavian-style apartment with panoramic river views and free Wi-Fi.",
-        price:2032,
-        rating: 3.5,
-location: {
-  city: "Sydney"
-}, owner:{
-  name: "Eilen",
-  phone: '115-355-5652',
-  email: 'Eilen@gmail.com'
-}
-      }
+      text: '',
+    };
+  },
+  methods:{
+    handleItemClick(){
+      console.log('item click')
     }
   }
-  // data() {
-  //   return {
-  //     amountOfClicks: 0,
-  //   }
-  // },
-  // computed: {
-  //   title() {
-  //     return `Amount of clicks ${this.amountOfClicks}`
-  //   }
-  // },
-  // methods: {
-  //   increment() {
-  //     this.amountOfClicks += 1
-  //   }
-  // }
-}
+};
 </script>
 
 <style>
@@ -69,4 +54,5 @@ location: {
   color: #2c3e50;
   margin-top: 60px;
 }
+
 </style>
