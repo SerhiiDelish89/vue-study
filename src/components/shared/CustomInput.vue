@@ -25,5 +25,9 @@
     outline: none;
     line-height: inherit;
     padding: 8px 15px;
+
+    &::placeholder{
+        color: inherit;
+    }
 }
 </style>
